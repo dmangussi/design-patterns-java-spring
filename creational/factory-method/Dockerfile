@@ -1,9 +1,14 @@
-FROM maven:3.9.4-eclipse-temurin-21-alpine as builder
-WORKDIR /app
-COPY . .
-RUN mvn clean package -DskipTests
+FROM maven:3.9.9-eclipse-temurin-21-alpine AS builder
 
-FROM eclipse-temurin:21-jdk-alpine
+WORKDIR /project
+
+COPY . .
+
+RUN mvn clean package -pl creational/factory-method -am -DskipTests
+
+FROM eclipse-temurin:21-jre-alpine
+
 WORKDIR /app
-COPY --from=builder /app/target/factory-method-*.jar app.jar
+COPY --from=builder /project/creational/factory-method/target/*.jar app.jar
+
 ENTRYPOINT ["java", "-jar", "app.jar"]

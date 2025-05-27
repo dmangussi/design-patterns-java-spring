@@ -1,4 +1,5 @@
 services:
   factory-method-app:
-    build: .
-    container_name: factory-method-app
+    build:
+      context: ../..
+      dockerfile: creational/factory-method/Dockerfile

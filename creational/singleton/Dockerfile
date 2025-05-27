@@ -1,13 +1,14 @@
-FROM maven:3.9.4-eclipse-temurin-21 as builder
+FROM maven:3.9.9-eclipse-temurin-21-alpine AS builder
+
+WORKDIR /project
+
+COPY . .
+
+RUN mvn clean package -pl creational/singleton -am -DskipTests
+
+FROM eclipse-temurin:21-jre-alpine
 
 WORKDIR /app
-COPY pom.xml .
-COPY src ./src
-RUN mvn clean package -DskipTests
-
-FROM eclipse-temurin:21-jdk-alpine
-
-WORKDIR /app
-COPY --from=builder /app/target/*.jar app.jar
+COPY --from=builder /project/creational/singleton/target/*.jar app.jar
 
 ENTRYPOINT ["java", "-jar", "app.jar"]

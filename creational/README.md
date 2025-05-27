@@ -9,7 +9,7 @@ Creational patterns are all about **object creation mechanisms**, trying to crea
 ## 📚 Included Patterns
 
 - [x] Singleton ✅
-- [ ] Factory (coming soon)
+- [x] Factory ✅
 - [ ] Builder (coming soon)
 - [ ] Abstract Factory (coming soon)
 - [ ] Prototype (coming soon)
